@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celtic FC 24/25 Away Jersey Kids</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            font-family: 'Kanit', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 8px;
+            font-size: 12px;
+        }
+
+        .product-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .product-images {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .add-to-bag {
+            background-color: rgb(253, 152, 1);
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        
+        @media (min-width: 768px) {
+            .product-container {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+
+            .product-images {
+                flex: 1;
+                margin-right: 20px;
+            }
+
+            .product-info {
+                flex: 1;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .product-title {
+                font-size: 32px;
+            }
+
+            .product-rating {
+                font-size: 20px;
+            }
+
+            .product-price {
+                font-size: 24px;
+            }
+        }
+
+        .product-images {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.product-images img {
+    width: 100%; /* Full width */
+    max-width: 400px; /* Adjust the max width as needed for larger screens */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Cover the container while maintaining aspect ratio */
+    margin-bottom: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Yum.</div>
+        <ul>
+            <li class="cart-icon">
+                <a href="cart.html">
+                    <i class="fas fa-shopping-cart"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M240-80q-33 0-56.5-23.5T160-160v-480q0-33 23.5-56.5T240-720h80q0-66 47-113t113-47q66 0 113 47t47 113h80q33 0 56.5 23.5T800-640v480q0 33-23.5 56.5T720-80H240Zm0-80h480v-480h-80v80q0 17-11.5 28.5T600-520q-17 0-28.5-11.5T560-560v-80H400v80q0 17-11.5 28.5T360-520q-17 0-28.5-11.5T320-560v-80h-80v480Zm160-560h160q0-33-23.5-56.5T480-800q-33 0-56.5 23.5T400-720ZM240-160v-480 480Z"/></svg></i>
+                    <span id="cart-count" class="cart-count">0</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="product-container">
+        <div class="product-images">
+            <img src="chakula/Bailey's Cookies and Cream Milkshake - Baking Mischief.jpeg" alt="Chicken Tikka" style="width:100%; margin-bottom: 10px;">
+        </div>
+        <div class="product-info">
+            <h1 class="product-title">Cookies and cream milkshake</h1>
+            <div class="product-price">Ksh 1,800.00</div>
+            <button class="add-to-bag" onclick="addToCart()">ADD TO CART</button>
+        </div>
+    </div>
+
+    <script>
+        function addToCart() {
+            const productName = document.querySelector('.product-title').innerText;
+            const productPrice = document.querySelector('.product-price').innerText;
+            const productImage = document.querySelector('.product-images img').src;
+
+            const cartItem = {
+                id: 'cookies-&-cream-milkshake', // Unique ID for the product
+                name: productName,
+                price: productPrice,
+                image: productImage,
+                quantity: 1
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.id === cartItem.id);
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push(cartItem);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert(`${productName} added to cart!`);
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+            document.getElementById('cart-count').textContent = cartCount;
+        }
+
+        // Initialize cart count on page load
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+    </script>
+</body>
+</html>

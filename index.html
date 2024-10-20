@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+body {
+    font-family:'kanit';
+}
+
+
+
+.navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #fefbfb;
+            color:rgb(252, 127, 3);
+            z-index: 1000; /* High z-index to appear over hero */
+            position: sticky;
+            top: 0;
+        }
+
+        .logo {
+            color: rgb(255, 155, 4);
+            text-decoration: none;
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'permanent marker';
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar .nav-links li {
+            margin-left: 20px;
+        }
+
+        .navbar .nav-links li a {
+            color: rgb(252, 127, 3);
+            text-decoration: none;
+            font-size: 18px;
+            padding: 8px 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar .nav-links li a:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background-color: rgb(4, 4, 4);
+            margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 60px;
+                right: -100%;
+                height: 100vh;
+                width: 200px;
+                background-color: #fffcfc;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease-in-out;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .navbar .nav-links li a {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Transform hamburger into an X when active */
+        .hamburger.active .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('other pics/hero-mod.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            text-align: center;
+            color: white;
+            z-index: 1; /* Lower z-index for the hero section */
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: orange;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: darkorange;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+/*hero     style          end*/
+
+.products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-info p {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+                .chef-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 20px 0;
+        }
+
+        .chef-image img {
+        max-width: 100%;
+        height: auto;
+        margin-right: 20px;
+        }
+
+        .chef-info {
+        max-width: 500px;
+        }
+
+        .chef-info h2 {
+        margin-bottom: 10px;
+        }
+
+        .chef-info p {
+        line-height: 1.6;
+        }
+
+        /* Responsive layout for smaller screens */
+        @media (max-width: 768px) {
+        .chef-section {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .chef-image img {
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        .chef-info {
+            max-width: 90%;
+        }
+        }
+
+        .customer-reviews {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .customer-review {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .customer-cards img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .customer-review h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .customer-review p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        @media (max-width: 1024px) {
+            .review-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .submit-button {
+            background-color: rgb(253, 152, 1);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background-color: rgb(240, 140, 0);
+        }
+
+        @media (min-width: 768px) {
+            .form-group {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .form-group label {
+                margin-bottom: 8px;
+            }
+        }
+        
+        /* General form styling */
+       
+
+        .footer {
+            background-color: #fffdfd;
+            color: #f88a04;
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin-bottom: 20px;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #f88a04;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #f88a04;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            color:orange;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #555;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-section {
+                margin-bottom: 30px;
+            }
+        }
+</style>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+          <a href="#">YUM</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="reservations.html">Reservations</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+      
+    <!----hero--->
+<section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Our Restaurant</h1>
+            <p>Experience the best cuisine in town.</p>
+            <a href="menu.html" class="btn">View Menu</a>
+        </div>
+    </section>
+    <!---hero ends-->
+
+    <!---product cards------------->
+       <h2 style="text-align: center; margin:5px 0px 0px 5px;">Our delivery patners:</h2>
+    <section class="products">
+       
+    <div class="product cards">
+        <img src="other pics/Uber Eats.jpeg" alt="">
+        <div class="product-info">
+            <p>Uber eats</p>   
+        </div>
+    </div>
+       
+    
+        <div class="product cards">
+        <img src="other pics/deliveroo.jpeg" alt="">
+        <div class="product-info">
+            <p>Deliveroo</p>   
+        </div>
+    </div>
+  
+
+   
+    <div class="product cards">
+        <img src="other pics/Jumia-Food.jpg" alt="">
+        <div class="product-info">
+            <p>Jumia food</p>   
+        </div>
+    </div>
+  
+
+    <div class="product cards">
+        <img src="other pics/Glovo.jpeg" alt="">
+        <div class="product-info">
+            <p>Glovo</p>   
+        </div>
+    </div>
+    
+</section>
+    <!------cards ends------------->
+    <!---Chef section ------------------>
+    <div class="chef-section">
+            <div class="chef-image">
+            <img src="other pics/16 Black Chefs Changing Food in America (Published 2019).jpeg" alt="">
+            </div>
+            <div class="chef-info">
+                <p><strong>Mary Kithure</strong></p>
+                <p>Our Chef:</p>
+            "Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+            Neque vel modi laudantium deleniti architecto beatae. 
+            Quos dolorum officia error praesentium pariatur, enim modi!"
+            </div>
+    </div>
+    <!-------Chef section ends---------->
+    <!-------------Customer reviews--------------------->
+    <section class="customer-reviews">
+        <h2 style="text-align: center;">Customer Reviews</h2>
+        <div class="review-cards">
+           
+        <div class="customer-review">
+            <div class="customer-cards">
+                <img src="other pics/customer-1.webp">
+            </div>
+            <h2 style="text-align: center;">Nice experience</h2>
+        <p>"Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+            Accusantium optio expedita molestias maiores, reprehenderit deleniti aperiam,
+             itaque nam in a necessitatibus modi? Error dignissimos pariatur quidem dolore vel blanditiis aperiam."</p>
+        </div>
+        </div>
+
+        <div class="review-cards">
+           
+        <div class="customer-review">
+            <div class="customer-cards">
+                    <img src="other pics/customer-2.jpeg">
+            </div>
+                <h2 style="text-align: center;">Nice experience</h2>
+            <p>"Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                Accusantium optio expedita molestias maiores, reprehenderit deleniti aperiam,
+                 itaque nam in a necessitatibus modi? Error dignissimos pariatur quidem dolore vel blanditiis aperiam."</p>
+            </div>
+        </div>
+
+        <div class="review-cards">
+           
+            <div class="customer-review">
+                <div class="customer-cards">
+                        <img src="other pics/Ibrahim.jpeg">
+                </div>
+                    <h2 style="text-align: center;">Nice experience</h2>
+                <p>"Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                    Accusantium optio expedita molestias maiores, reprehenderit deleniti aperiam,
+                     itaque nam in a necessitatibus modi? Error dignissimos pariatur quidem dolore vel blanditiis aperiam."</p>
+                </div>
+            </div>
+            
+            <div class="review-cards">
+           
+                <div class="customer-review">
+                    <div class="customer-cards">
+                            <img src="other pics/5 Outfit Combinations Confident Women Swear By.jpeg">
+                    </div>
+                        <h2 style="text-align: center;">Nice experience</h2>
+                    <p>"Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+                        Accusantium optio expedita molestias maiores, reprehenderit deleniti aperiam,
+                         itaque nam in a necessitatibus modi? Error dignissimos pariatur quidem dolore vel blanditiis aperiam."</p>
+                    </div>
+                </div>
+
+    </section>
+
+    <div class="contact-container">
+        <h1>Contact Us</h1>
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Send Message</button>
+        </form>
+    </div>
+    
+      
+     <!-------------Customer reviews--------------------->
+     <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>We are passionate about delivering exceptional dining experiences with the finest ingredients and culinary expertise.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="reservations.html">Reservations</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>123 Restaurant Street</li>
+                    <li>Otonglo,Kisumu 12345</li>
+                    <li>Phone: (123) 456-7890</li>
+                    <li>Email: info@restaurant.com</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"></a>
+                    <a href="#" aria-label="Twitter"></a>
+                    <a href="#" aria-label="Instagram"></a>
+                    <a href="#" aria-label="LinkedIn"></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 Yum. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+    });
+
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Message sent! Thank you for contacting us.');
+            this.reset(); // Reset the form after submission
+        });
+
+    </script>
+</body>
+</html>
+
+    

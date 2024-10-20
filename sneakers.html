@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+   <script src="js/script.js" defer></script>
+
+   <title>Sneaker page</title>
+</head>
+<style>
+ 
+@import url('https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Calligraffitti&family=Covered+By+Your+Grace&display=swap');
+
+
+*{
+  margin: 0;
+  padding: 0;
+}
+a{
+   text-decoration: none;
+}
+H3{
+   font-family:'josefin sans';
+}
+
+nav{
+  background-color: white;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+nav ul{
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+nav li{
+  height: 50px;
+}
+nav a{
+  height: 100%;
+  padding: 0 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: black;
+}
+nav a:hover{
+  background-color: #f0f0f0;
+}
+nav li:first-child{
+  margin-right: auto;
+}
+.sidebar{
+  position: fixed;
+  top: 0; 
+  right: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.sidebar li{
+  width: 100%;
+}
+.sidebar a{
+  width: 100%;
+}
+.menu-button{
+  display: none;
+}
+@media(max-width: 800px){
+  .hideOnMobile{
+    display: none;
+  }
+  .menu-button{
+    display: block;
+  }
+}
+@media(max-width: 400px){
+  .sidebar{
+    width: 100%;
+  }
+}
+.black-button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.black-button:hover {
+  background-color: #333;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.black-button:active {
+  background-color: #444;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+/*nav bar ends*/
+
+
+/*card styles*/
+.container{
+   max-width: 1200px;
+   margin:0 auto;
+   padding:3rem 2rem;
+}
+
+.container .title{
+   font-size: 3.5rem;
+   color:#444;
+   margin-bottom: 3rem;
+   text-transform: uppercase;
+   text-align: center;
+}
+
+.container .products-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+   gap:2rem;
+}
+
+.container .products-container .product{
+   text-align: center;
+   padding:3rem 2rem;
+   background: #fff;
+   box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+   outline: .1rem solid #ccc;
+   outline-offset: -1.5rem;
+   cursor: pointer;
+}
+
+.container .products-container .product:hover{
+   outline: .2rem solid #222;
+   outline-offset: 0;
+}
+
+.container .products-container .product img{
+   height: 25rem;
+}
+
+.container .products-container .product:hover img{
+   transform: scale(.9);
+}
+
+.container .products-container .product h3{
+   padding:.5rem 0;
+   font-size: 2rem;
+   color:#444;
+}
+
+.container .products-container .product:hover h3{
+   color:#27ae60;
+}
+
+.container .products-container .product .price{
+   font-size: 2rem;
+   color:#444;
+}
+
+.products-preview{
+   position: fixed;
+   top:0; left:0;
+   min-height: 100vh;
+   width: 100%;
+   background: rgba(0,0,0,.8);
+   display: none;
+   align-items: center;
+   justify-content: center;
+}
+
+.products-preview .preview{
+   display: none;
+   padding:2rem;
+   text-align: center;
+   background: #fff;
+   position: relative;
+   margin:2rem;
+   width: 40rem;
+}
+
+.products-preview .preview.active{
+   display: inline-block;
+}
+
+.products-preview .preview img{
+   height: 30rem;
+}
+
+.products-preview .preview .fa-times{
+   position: absolute;
+   top:1rem; right:1.5rem;
+   cursor: pointer;
+   color:#444;
+   font-size: 4rem;
+}
+
+.products-preview .preview .fa-times:hover{
+   transform: rotate(90deg);
+}
+
+.products-preview .preview h3{
+   color:#444;
+   padding:.5rem 0;
+   font-size: 2.5rem;
+}
+
+.products-preview .preview .stars{
+   padding:1rem 0;
+   font-size: 1.7rem;
+}
+
+.products-preview .preview .stars i{
+   color:#27ae60;
+}
+
+.products-preview .preview .stars span{
+   color:#999;
+}
+
+.products-preview .preview p{
+   line-height: 1.5;
+   padding:1rem 0;
+   font-size: 1.6rem;
+   color:#777;
+}
+
+.products-preview .preview .price{
+   padding:1rem 0;
+   font-size: 2.5rem;
+   color:#27ae60;
+}
+
+.products-preview .preview .buttons{
+   display: flex;
+   gap:1.5rem;
+   flex-wrap: wrap;
+   margin-top: 1rem;
+}
+
+.products-preview .preview .buttons a{
+   flex:1 1 16rem;
+   padding:1rem;
+   font-size: 1.8rem;
+   color:#444;
+   border:.1rem solid #444;
+}
+
+.products-preview .preview .buttons a.cart{
+   background: #444;
+   color:#fff;
+}
+
+.products-preview .preview .buttons a.cart:hover{
+   background: #111;
+}
+
+.products-preview .preview .buttons a.buy:hover{
+   background: #444;
+   color:#fff;
+}
+
+
+@media (max-width:991px){
+
+   html{
+      font-size: 55%;
+   }
+
+}
+
+@media (max-width:768px){
+
+   .products-preview .preview img{
+      height: 25rem;
+   }
+
+}
+
+@media (max-width:450px){
+
+   html{
+      font-size: 50%;
+   }
+
+}
+/*card styles ends*/
+
+.size-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.size-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.size-btn.active {
+    background-color: #000;
+    color: #fff;
+}
+
+
+/* cart*/
+.cart-icon {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: 10px; /* Adjust this value as needed */
+    right: -10px; /* Adjust this value to move the badge horizontally */
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    display: none; /* Hide by default */
+    z-index: 1; /* Ensure it stays above other elements */
+}
+
+
+
+/* Basic reset for button styles */
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Style for size buttons */
+.size-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    border: 2px solid #333; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f5f5f5; /* Light background color */
+    color: #333; /* Text color */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+/* Hover state */
+.size-btn:hover {
+    background-color: #e0e0e0; /* Slightly darker background on hover */
+    color: #000; /* Darker text color on hover */
+}
+
+/* Active state when button is clicked */
+.size-btn:active {
+    background-color: #d0d0d0; /* Even darker background when active */
+}
+
+/* Selected state */
+.size-btn.selected {
+    background-color: #333; /* Dark background for selected state */
+    color: #fff; /* White text for selected state */
+    border-color: #333; /* Match border with background */
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 600px) {
+    .size-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+
+/* cart ends*/
+</style>
+
+
+<body>
+   <nav>
+      <ul class="sidebar">
+        <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg></a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sneakers.html">Collection</a></li>
+        <li><a href="cart.html">Login</a></li>
+        <li><a href="cart.html">Cart</a>
+      </li>
+      
+      </ul>
+      <ul>
+        <li style="font-family: 'Covered By Your Grace'; font-size:xx-large;"
+        ><a href="#">Njumu.</a></li>
+        <li class="hideOnMobile"><a href="index.html">Home</a></li>
+        <li class="hideOnMobile"><a href="sneakers.html">Collections</a></li>
+        <li style=" display: flex;
+        gap: 20px;
+        align-items: center;
+        padding: 10px; 
+         font-size: 15px;
+         color: #000; /* Change this color as needed */"
+
+         class=""><a href="login.html"><i class="fa fa-user"></i></a></li>
+
+
+        <li 
+         style=" display: flex;
+        gap: 20px;
+        align-items: center;
+        padding: 10px; 
+         font-size: 15px;
+         color: #000; /* Change this color as needed */"
+        class="cart-icon"><a href="cart.html"><i class=" fas fa-shopping-cart"></i></a>
+        <span id="cart-count" class="cart-count">0</span></li>
+
+
+        <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></a></li>
+      </ul>
+    </nav>
+    <!--Navbar ebds here-->
+
+    <!--products cards-->
+     
+<div class="container">
+
+   <h3  style="font-family:'josefinsans';font-size: larger;"
+   class="title" >Our collections</h3>
+
+   <div class="products-container">
+
+      <div class="product" data-name="p-1">
+         <img src="sneakers/adidas-3.avif" alt="">
+         <h3>Adidas Vector</h3>
+         <div class="price">Ksh4800.00</div>
+      </div>
+
+      <div class="product" data-name="p-2">
+         <img src="sneakers/puma-2.avif" alt="">
+         <h3>Puma rsx</h3>
+         <div class="price">Ksh4500.00</div>
+      </div>
+
+      <div class="product" data-name="p-3">
+         <img src="sneakers/air-max-95-2.png" alt="">
+         <h3>Air Max 95</h3>
+         <div class="price">Ksh3750.00</div>
+      </div>
+
+      <div class="product" data-name="p-4">
+         <img src="sneakers/category 1.webp" alt="">
+         <h3>New balance 550</h3>
+         <div class="price">Ksh3500</div>
+      </div>
+
+      <div class="product" data-name="p-5">
+         <img src="sneakers/product-5.png" alt="">
+         <h3>Nike dunk low</h3>
+         <div class="price">Ksh5500</div>
+      </div>
+      <div class="product" data-name="p-6">
+         <img src="sneakers/category 3.webp" alt="">
+         <h3>New balance S</h3>
+         <div class="price">Ksh6500</div>
+      </div>
+
+</div>
+ <!--products end here-->
+
+
+
+   <!--popup-->
+   <div class="products-preview">
+
+      <div class="preview" data-target="p-1">
+         <i class="fas fa-times"></i>
+         <img src="sneakers/adidas-3.avif" alt="">
+         <h3>Adidas vector</h3>
+         <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>( 250 )</span>
+         </div>
+         <p>For a trendy stylish look</p>
+         <div class="size-buttons">
+            <button class="size-btn" data-size="39">39</button>
+            <button class="size-btn" data-size="41">41</button>
+            <button class="size-btn" data-size="42">42</button>
+            <button class="size-btn" data-size="44">44</button>
+        </div>
+         <div class="price">ksh4800.00</div>
+         <div class="buttons">
+            <a href="#" class="buy">buy now</a>
+           <a href="#" class="cart" onclick="addToCart('p-1'); return false;">add to cart</a>
+         </div>
+      </div>
+   
+      <div class="preview" data-target="p-2">
+         <i class="fas fa-times"></i>
+         <img src="sneakers/puma-2.avif" alt="">
+         <h3>Puma rsx</h3>
+         <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>( 250 )</span>
+         </div>
+         <p>For the fitness lovers</p>
+         <div class="size-buttons">
+            <button class="size-btn" data-size="39">39</button>
+            <button class="size-btn" data-size="41">41</button>
+            <button class="size-btn" data-size="42">42</button>
+            <button class="size-btn" data-size="44">44</button>
+        </div>
+         <div class="price">Ksh4,500.00</div>
+         <div class="buttons">
+            <a href="#" class="buy">buy now</a>
+            <a href="#" class="cart" onclick="addToCart('p-2'); return false;">add to cart</a>
+         </div>
+      </div>
+   
+      <div class="preview" data-target="p-3">
+         <i class="fas fa-times"></i>
+         <img src="sneakers/air-max-95-2.png" alt="">
+         <h3>Air max 95</h3>
+         <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>( 250 )</span>
+         </div>
+         <p>For a trendy fashionable look</p>
+         <div class="size-buttons">
+            <button class="size-btn" data-size="39">39</button>
+            <button class="size-btn" data-size="41">41</button>
+            <button class="size-btn" data-size="42">42</button>
+            <button class="size-btn" data-size="44">44</button>
+        </div>
+         <div class="price">Ksh3,750.00</div>
+         <div class="buttons">
+            <a href="#" class="buy">buy now</a>
+            <a href="#" class="cart" onclick="addToCart('p-3'); return false;">add to cart</a>
+         </div>
+      </div>
+   
+      <div class="preview" data-target="p-4">
+         <i class="fas fa-times"></i>
+         <img src="sneakers/category 1.webp" alt="">
+         <h3>New balance 550</h3>
+         <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>( 250 )</span>
+         </div>
+         <p>For a stylish look</p>
+         <div class="size-buttons">
+            <button class="size-btn" data-size="39">39</button>
+            <button class="size-btn" data-size="41">41</button>
+            <button class="size-btn" data-size="42">42</button>
+            <button class="size-btn" data-size="44">44</button>
+        </div>
+         <div class="price">Ksh3,500.00</div>
+         <div class="buttons">
+            <a href="#" class="buy">buy now</a>
+            <a href="#" class="cart" onclick="addToCart('p-4'); return false;">add to cart</a>
+         </div>
+      </div>
+   
+      <div class="preview" data-target="p-5">
+         <i class="fas fa-times"></i>
+         <img src="sneakers/product-5.png" alt="">
+         <h3>Nike Dunk low</h3>
+         <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>( 250 )</span>
+         </div>
+         <p>For a stylish look.</p>
+         <div class="size-buttons">
+            <button class="size-btn" data-size="39">39</button>
+            <button class="size-btn" data-size="41">41</button>
+            <button class="size-btn" data-size="42">42</button>
+            <button class="size-btn" data-size="44">44</button>
+        </div>
+         <div class="price">Ksh5,500.00</div>
+         <div class="buttons">
+            <a href="#" class="buy">buy now</a>
+            <a href="#" class="cart" onclick="addToCart('p-5'); return false;">add to cart</a>
+         </div>
+      </div>
+   
+      <div class="preview" data-target="p-6">
+         <i class="fas fa-times"></i>
+         <img src="sneakers/category 3.webp" alt="">
+         <h3>New Balance S</h3>
+         <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span>( 250 )</span>
+         </div>
+         <p>Look good ,feel good.</p>
+         <div class="size-buttons">
+            <button class="size-btn" data-size="39">39</button>
+            <button class="size-btn" data-size="41">41</button>
+            <button class="size-btn" data-size="42">42</button>
+            <button class="size-btn" data-size="44">44</button>
+        </div>
+         <div class="price">Ksh6,500.00</div>
+         <div class="buttons">
+            <a href="#" class="buy">buy now</a>
+            <a href="#" class="cart" onclick="addToCart('p-6'); return false;">add to cart</a>
+         </div>
+      </div>
+
+
+
+   <!--popup ends-->
+
+
+   <script>
+      function showSidebar(){
+    const sidebar = document.querySelector('.sidebar')
+    sidebar.style.display = 'flex'
+  }
+  function hideSidebar(){
+    const sidebar = document.querySelector('.sidebar')
+    sidebar.style.display = 'none'
+  }
+
+//popups
+let preveiwContainer = document.querySelector('.products-preview');
+let previewBox = preveiwContainer.querySelectorAll('.preview');
+
+document.querySelectorAll('.products-container .product').forEach(product =>{
+  product.onclick = () =>{
+    preveiwContainer.style.display = 'flex';
+    let name = product.getAttribute('data-name');
+    previewBox.forEach(preview =>{
+      let target = preview.getAttribute('data-target');
+      if(name == target){
+        preview.classList.add('active');
+      }
+    });
+  };
+});
+
+previewBox.forEach(close =>{
+  close.querySelector('.fa-times').onclick = () =>{
+    close.classList.remove('active');
+    preveiwContainer.style.display = 'none';
+  };
+});
+
+//end of popups
+
+//cart count functionality
+
+// Function to simulate adding an item to the cart
+
+function myItem() {
+   
+    const cartCount = document.getElementById('cart-count');
+    
+    let count = parseInt(cartCount.textContent, 10);
+    count += 1;
+    cartCount.textContent = count;
+    cartCount.style.display = 'inline-block'; 
+}
+document.addEventListener('DOMContentLoaded', () => {
+    const cartCount = document.getElementById('cart-count');
+    if (parseInt(cartCount.textContent, 10) > 0) {
+        cartCount.style.display = 'inline-block';
+    }
+});
+
+//end of cart count fynctionality
+
+//selected sizes
+// Function to handle size button selection
+function handleSizeSelection(event) {
+    if (event.target.classList.contains('size-btn')) {
+        const buttons = document.querySelectorAll('.size-btn');
+        buttons.forEach(btn => btn.classList.remove('selected')); // Remove 'selected' class from all buttons
+
+        event.target.classList.add('selected'); // Add 'selected' class to clicked button
+
+        // You can also add logic here to handle the selected size, e.g., store it or display it somewhere
+        const selectedSize = event.target.getAttribute('data-size');
+        console.log('Selected size:', selectedSize);
+    }
+}
+
+// Add event listener for size buttons
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.size-btn').forEach(btn => {
+        btn.addEventListener('click', handleSizeSelection);
+    });
+});
+
+//end of selected sizes
+
+//selected items
+
+function addToCart(productId) {
+    const productElement = document.querySelector(`.preview[data-target="${productId}"]`);
+    const productName = productElement.querySelector('h3').innerText;
+    const productPrice = productElement.querySelector('.price').innerText;
+    const productSize = productElement.querySelector('.size-buttons .size-btn.selected')?.dataset.size || 'N/A';
+    const productImage = productElement.querySelector('img').src;
+
+    const cartItem = {
+        id: productId,
+        name: productName,
+        price: productPrice,
+        size: productSize,
+        image: productImage,
+        quantity: 1
+    };
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItemIndex = cart.findIndex(item => item.id === productId && item.size === productSize);
+    if (existingItemIndex > -1) {
+        cart[existingItemIndex].quantity += 1;
+    } else {
+        cart.push(cartItem);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    alert(`${productName} (Size: ${productSize}) added to cart!`);
+}
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+    document.getElementById('cart-count').textContent = cartCount;
+    document.getElementById('cart-count').style.display = cartCount > 0 ? 'inline-block' : 'none';
+}
+
+
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+    document.getElementById('cart-count').textContent = cartCount;
+    document.getElementById('cart-count').style.display = cartCount > 0 ? 'inline-block' : 'none';
+}
+
+// Initialize cart count on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateCartCount();
+});
+
+
+
+
+
+
+
+
+//end of selected items
+   </script>
+</body>
+</html>

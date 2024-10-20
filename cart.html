@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+                    .checkout-btn {
+                display: inline-block;
+                background-color: #f68e05;
+                color: white;
+                padding: 12px 20px;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                border-radius: 4px;
+                transition: background-color 0.3s;
+            }
+            .checkout-btn:hover {
+                background-color: #040404;
+            }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .cart-item img {
+            width: 100px;
+            margin-right: 20px;
+        }
+        .item-details {
+            flex-grow: 1;
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-controls button {
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            margin: 0 5px;
+            background-color: #fda308;
+            color: white;
+        }
+        .delete-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    <div id="cart-items"></div>
+    <div id="cart-total"></div>
+    <a href="checkout.html" class="checkout-btn">Proceed to Checkout</a>
+
+    <script>
+        
+        function displayCart() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItemsElement = document.getElementById('cart-items');
+    const cartTotalElement = document.getElementById('cart-total');
+    
+    cartItemsElement.innerHTML = '';
+    if (cart.length === 0) {
+        cartItemsElement.innerHTML = '<p>Your cart is empty</p>';
+        cartTotalElement.textContent = 'Total: Ksh0.00';
+        return;
+    }
+
+    cart.forEach((item, index) => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'cart-item';
+        itemElement.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="item-details">
+                <h3>${item.name}</h3>
+                <p>Price: ${item.price}</p>
+                ${item.size ? `<p>Size: ${item.size}</p>` : ''} <!-- Only show size if it exists -->
+                <div class="quantity-controls">
+                    <button onclick="changeQuantity(${index}, -1)">-</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="changeQuantity(${index}, 1)">+</button>
+                </div>
+            </div>
+            <button class="delete-btn" onclick="removeItem(${index})">Remove</button>
+        `;
+        cartItemsElement.appendChild(itemElement);
+    });
+
+    updateTotal();
+}
+
+        function changeQuantity(index, change) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart[index].quantity += change;
+            if (cart[index].quantity < 1) cart[index].quantity = 1;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+        function removeItem(index) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+        function updateTotal() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartTotalElement = document.getElementById('cart-total');
+            let total = 0;
+
+            cart.forEach(item => {
+                const priceValue = parseFloat(item.price.replace(/[^0-9.]/g, ''));
+                total += priceValue * item.quantity;
+            });
+
+            cartTotalElement.textContent = `Total: Ksh${total.toFixed(2)}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', displayCart);
+    </script>
+</body>
+</html>

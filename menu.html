@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+        body {
+            font-family: 'Kanit';
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #fefbfb;
+            color:rgb(252, 127, 3);
+            z-index: 1000; /* High z-index to appear over hero */
+            position: sticky;
+            top: 0;
+        }
+
+        .logo {
+            color: rgb(255, 155, 4);
+            text-decoration: none;
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'permanent marker';
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar .nav-links li {
+            margin-left: 20px;
+        }
+
+        .navbar .nav-links li a {
+            color: rgb(252, 127, 3);
+            text-decoration: none;
+            font-size: 18px;
+            padding: 8px 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar .nav-links li a:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background-color: rgb(4, 4, 4);
+            margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 60px;
+                right: -100%;
+                height: 100vh;
+                width: 200px;
+                background-color: #fffcfc;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease-in-out;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .navbar .nav-links li a {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Transform hamburger into an X when active */
+        .hamburger.active .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        h3.title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 15px;
+            transition: transform 0.2s ease;
+            position: relative;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .product h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 18px;
+            color: #ff6600;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .discount {
+            color: #ff3300;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .free-delivery {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: orange;
+            color: white;
+            padding: 3px 6px;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+
+        .official-store {
+            background-color: #007bff;
+            color: white;
+            padding: 3px 6px;
+            font-size: 12px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .products-container {
+                grid-template-columns: 1fr 1fr; /* 2 columns on tablet size */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-container {
+                grid-template-columns: 1fr; /* 1 column on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+          <a href="#">YUM</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="reservations.html">Reservations</a></li>
+          <li><a href="cart.html"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg></a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+
+
+    <h3 class="title">Our Menu</h3>
+    <div class="products-container">
+       <a href="product1.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Mouthwatering Chicken Tikka Masala_ An Easy, Authentic Recipe You'll Crave.jpeg" alt="Chicken Tikka">
+            <h3>Chicken Tikka</h3>
+            <div class="price">Ksh 1,200.00</div>
+            <div class="old-price">Ksh 2,000.00 <span class="discount">-10%</span></div>
+        </div>
+       </a>
+
+       <a href="product2.html">
+            <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Back to Basics_ Roasted Whole Chicken - PaleOMG.jpeg" alt="Chicken Roasted">
+            <h3>Chicken Roasted</h3>
+            <div class="price">Ksh 1,900.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-15%</span></div>
+        </div>
+       </a>
+
+       <a href="product3.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/chicken  biryani (1).jpeg" alt="Chicken Biryani">
+            <h3>Chicken Biryani</h3>
+            <div class="price">Ksh 1,400.00</div>
+            <div class="old-price">Ksh 2,050.00 <span class="discount">-12%</span></div>
+        </div>
+       </a>
+         
+       <a href="product4.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Fish and Chips med remouladsås - Zeinas Kitchen.jpeg" alt="Fish and Chips">
+            <h3>Fish and Chips</h3>
+            <div class="price">Ksh 600.00</div>
+            <div class="old-price">Ksh 1,150.00 <span class="discount">-17%</span></div>
+        </div>
+       </a>
+     
+       <a href="product5.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/762beff1-9e83-42db-a6c7-a1677836a368.jpeg" alt="Fried Rice">
+            <h3>Roasted meat with ugali</h3>
+            <div class="price">Ksh 800.00</div>
+            <div class="old-price">Ksh 1,000.00 <span class="discount">-10%</span></div>
+        </div>
+       </a>
+        
+       <a href="product6.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Chicken Stew (African Style).jpeg" alt="Jollof Rice">
+            <h3>Chicken stew</h3>
+            <div class="price">Ksh 1,800.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-14%</span></div>
+        </div>
+       </a>
+
+       <a href="product7.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/download.jpeg" alt="Jollof Rice">
+            <h3>Jollof rice</h3>
+            <div class="price">Ksh 1,500.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-14%</span></div>
+        </div>
+       </a>
+
+       <a href="product8.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/a common Kenyan dish.jpeg" alt="Jollof Rice">
+            <h3>Chapati & beef wet fry</h3>
+            <div class="price">Ksh 1,900.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-14%</span></div>
+        </div>
+       </a>
+
+        <a href="product9.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Spaghetti and Meatballs Recipe (VIDEO).jpeg" alt="Jollof Rice">
+            <h3>Spaghetti meatballs</h3>
+            <div class="price">Ksh 1,750.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-14%</span></div>
+        </div>
+        </a>
+
+        <a href="product10.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Garlic Parmesan Chicken Alfredo - The Cooking Duo.jpeg" alt="Jollof Rice">
+            <h3>Chicken Alfredo</h3>
+            <div class="price">Ksh 1,800.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-14%</span></div>
+        </div>
+        </a>
+
+        <a href="product11.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Long Island Iced Tea & Long Island Drink Variations.jpeg" alt="Jollof Rice">
+            <h3>Iced tea</h3>
+            <div class="price">Ksh 300.00</div>
+            <div class="old-price">Ksh 450.00 <span class="discount">-14%</span></div>
+        </div>
+        </a>
+     
+        <a href="product12.html">                   
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Mango-Berry Smoothie.jpeg" alt="Cocktails">
+            <h3>Mango Berry smoothie</h3>
+            <div class="price">Ksh 400.00</div>
+            <div class="old-price">Ksh 550.00 <span class="discount">-10%</span></div>
+        </div>
+        </a>
+
+        <a href="product13.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Indulgent Oreo Milkshake - Bake with Shivesh.jpeg" alt="Chocolate Milkshake">
+            <h3>Oreo Milkshake</h3>
+            <div class="price">Ksh 400.00</div>
+            <div class="old-price">Ksh 600.00 <span class="discount">-15%</span></div>
+        </div>
+        </a>
+
+        <a href="product14.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Blue Hawaiian Cocktail.jpeg" alt="Chocolate Milkshake">
+            <h3>Blue Hawaian cocktail</h3>
+            <div class="price">Ksh 1,500.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-15%</span></div>
+        </div>
+        </a>
+
+        <a href="product15.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Bailey's Cookies and Cream Milkshake - Baking Mischief.jpeg" alt="Chocolate Milkshake">
+            <h3>Cookies&cream Milkshake</h3>
+            <div class="price">Ksh 1,800.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-15%</span></div>
+        </div>
+        </a>
+
+        <a href="product16.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/How to make the perfect Margarita frozen.jpeg" alt="Chocolate Milkshake">
+            <h3>Frozen magarita</h3>
+            <div class="price">Ksh 1,800.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-15%</span></div>
+        </div>
+        </a>
+
+        <a href="product17.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Premium Photo _ Chocolate milkshake served in a clear glass on a dark background Isolated drink.jpeg" alt="Chocolate Milkshake">
+            <h3>Chocolate Milkshake</h3>
+            <div class="price">Ksh 1,800.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-15%</span></div>
+        </div>
+        </a>
+
+        <a href="product18.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Berry Lemonade Spritz Mocktail _ Refreshing Summer Drink or Festive Party Beverage - Veggie Vibes & Vines.jpeg" alt="Chocolate Milkshake">
+            <h3>Lemonade mocktail</h3>
+            <div class="price">Ksh 1,800.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-15%</span></div>
+        </div>
+        </a>
+
+        <a href="product19.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Tequila Sunset.jpeg" alt="Chocolate Milkshake">
+            <h3>Tequila sunset</h3>
+            <div class="price">Ksh 1,800.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-15%</span></div>
+        </div>
+        </a>
+
+        <a href="product20.html">
+        <div class="product">
+            <div class="free-delivery">Free Delivery</div>
+            <img src="chakula/Turquoise Tonic.jpeg" alt="Chocolate Milkshake">
+            <h3>Turqoiuse tonic</h3>
+            <div class="price">Ksh 1,800.00</div>
+            <div class="old-price">Ksh 2,100.00 <span class="discount">-15%</span></div>
+        </div>
+        </a>
+    </div>
+
+    <script>
+        // JavaScript for sidebar functionality
+        function showSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.style.display = 'flex';
+        }
+
+        function hideSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.style.display = 'none';
+        }
+
+        // Preview functionality
+        let previewContainer = document.querySelector('.products-preview');
+        let previewBox = previewContainer.querySelectorAll('.preview');
+
+        document.querySelectorAll('.products-container .product').forEach(product => {
+            product.onclick = () => {
+                previewContainer.style.display = 'flex';
+                let name = product.getAttribute('data-name');
+                previewBox.forEach(preview => {
+                    let target = preview.getAttribute('data-target');
+                    if (name == target) {
+                        preview.classList.add('active');
+                    }
+                });
+            };
+        });
+
+        previewBox.forEach(close => {
+            close.querySelector('.fa-times').onclick = () => {
+                close.classList.remove('active');
+                previewContainer.style.display = 'none';
+            };
+        });
+
+        // Cart functionality
+        function addToCart(productId) {
+            const productElement = document.querySelector(`.preview[data-target="${productId}"]`);
+            const productName = productElement.querySelector('h3').innerText;
+            const productPrice = productElement.querySelector('.price').innerText;
+            const productImage = productElement.querySelector('img').src;
+
+            const cartItem = {
+                id: productId,
+                name: productName,
+                price: productPrice,
+                image: productImage,
+                quantity: 1
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.id === productId);
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push(cartItem);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert(`${productName} added to cart!`);
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+            document.getElementById('cart-count').textContent = cartCount;
+            document.getElementById('cart-count').style.display = cartCount > 0 ? 'inline-block' : 'none';
+        }
+
+        // Initialize cart count on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+        });
+
+
+        const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+    });
+
+
+    </script>
+</body>
+</html>
